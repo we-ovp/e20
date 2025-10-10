@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E20 Fuel Simulator - Clean Energy for India</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>🌱 E20 Fuel Simulator</h1>
+            <p>Discover the environmental benefits of ethanol-blended fuel in India</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Emissions Dashboard -->
+            <aside class="emissions-panel">
+                <h3>🌍 Emissions Monitor</h3>
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">CO₂ Emissions</span>
+                        <span class="emission-value" id="co2-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill co2-fill" id="co2-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="co2-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">CO Emissions</span>
+                        <span class="emission-value" id="co-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill co-fill" id="co-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="co-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">HC Emissions</span>
+                        <span class="emission-value" id="hc-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill hc-fill" id="hc-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="hc-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">Particulate Matter</span>
+                        <span class="emission-value" id="pm-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill pm-fill" id="pm-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="pm-reduction">-0% vs Pure Petrol</span>
+                </div>
+            </aside>
+
+            <!-- Central Engine Area -->
+            <main class="engine-area">
+                <div class="engine-container">
+                    <div class="engine-glow" id="engine-glow"></div>
+                    
+                    <!-- Engine SVG -->
+                    <div class="engine-svg">
+                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Engine Block -->
+                            <rect x="100" y="100" width="200" height="120" rx="10" fill="#2a2a2a" stroke="#4a4a4a" stroke-width="2"/>
+                            
+                            <!-- Cylinders -->
+                            <circle cx="140" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
+                            <circle cx="180" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
+                            <circle cx="220" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
+                            <circle cx="260" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
+                            
+                            <!-- Pistons -->
+                            <rect x="135" y="125" width="10" height="30" fill="#333" class="piston piston-1"/>
+                            <rect x="175" y="125" width="10" height="30" fill="#333" class="piston piston-2"/>
+                            <rect x="215" y="125" width="10" height="30" fill="#333" class="piston piston-3"/>
+                            <rect x="255" y="125" width="10" height="30" fill="#333" class="piston piston-4"/>
+                            
+                            <!-- Exhaust Pipes -->
+                            <rect x="320" y="120" width="40" height="15" rx="7" fill="#444" stroke="#666"/>
+                            <rect x="320" y="145" width="40" height="15" rx="7" fill="#444" stroke="#666"/>
+                            
+                            <!-- Engine Belt -->
+                            <circle cx="350" cy="180" r="25" fill="none" stroke="#666" stroke-width="3" class="engine-belt"/>
+                            <circle cx="320" cy="200" r="15" fill="none" stroke="#666" stroke-width="2"/>
+                            
+                            <!-- Air Filter -->
+                            <rect x="80" y="120" width="15" height="40" rx="5" fill="#555" stroke="#777"/>
+                            
+                            <!-- Fuel Injectors -->
+                            <rect x="130" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
+                            <rect x="170" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
+                            <rect x="210" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
+                            <rect x="250" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
+                        </svg>
+                    </div>
+
+                    <!-- Smoke Particles -->
+                    <div class="smoke-container" id="smoke-container">
+                        <!-- Smoke particles will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Ethanol Control -->
+                <div class="ethanol-control">
+                    <div class="slider-container">
+                        <label for="ethanol-slider">Ethanol Percentage</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="ethanol-slider" min="0" max="20" value="0" step="1">
+                            <div class="slider-track">
+                                <div class="slider-fill" id="slider-fill"></div>
+                            </div>
+                        </div>
+                        <div class="ethanol-display">
+                            <span class="ethanol-value" id="ethanol-value">E0</span>
+                            <span class="ethanol-percentage">0% Ethanol</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Information Panel -->
+            <aside class="info-panel">
+                <div class="info-tabs">
+                    <button class="tab-btn active" data-tab="benefits">🌱 Benefits</button>
+                    <button class="tab-btn" data-tab="challenges">⚠️ Challenges</button>
+                    <button class="tab-btn" data-tab="india">🇮🇳 India Status</button>
+                </div>
+
+                <div class="tab-content active" id="benefits-tab">
+                    <div class="info-card">
+                        <div class="info-icon">🌱</div>
+                        <div class="info-text">
+                            <h4>Reduced Emissions</h4>
+                            <p>E20 reduces CO emissions by 30-50% and CO2 by 30% compared to pure petrol</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <div class="info-text">
+                            <h4>Energy Security</h4>
+                            <p>Reduces India's crude oil imports by ₹43,000 crore annually</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🌾</div>
+                        <div class="info-text">
+                            <h4>Farmer Income</h4>
+                            <p>Provides ₹40,000 crore annually to farmers through ethanol production</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">♻️</div>
+                        <div class="info-text">
+                            <h4>Renewable Source</h4>
+                            <p>Ethanol is produced from sugarcane and other agricultural crops</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="challenges-tab">
+                    <div class="info-card">
+                        <div class="info-icon">⛽</div>
+                        <div class="info-text">
+                            <h4>Mileage Impact</h4>
+                            <p>Slight fuel efficiency drop of 1-6% in some vehicles</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔧</div>
+                        <div class="info-text">
+                            <h4>Vehicle Compatibility</h4>
+                            <p>Older vehicles may need tuning for optimal E20 performance</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🏗️</div>
+                        <div class="info-text">
+                            <h4>Infrastructure</h4>
+                            <p>Need for E20-compatible fuel stations and supply chains</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⚖️</div>
+                        <div class="info-text">
+                            <h4>Food vs Fuel</h4>
+                            <p>Balance needed between crop use for food and ethanol production</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="india-tab">
+                    <div class="india-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">2025</div>
+                            <div class="stat-label">20% ethanol blending achieved, 5 years ahead of schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">₹1,44,087 Cr</div>
+                            <div class="stat-label">Foreign exchange saved since 2014-15</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">736 L MT</div>
+                            <div class="stat-label">CO2 reduction since 2014</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Nationwide</div>
+                            <div class="stat-label">E20 availability by 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Floating Background Particles -->
+        <div class="bg-particles" id="bg-particles"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E20 Fuels</title>
+
+  <!-- Rive CDN -->
+  <script src="https://unpkg.com/@rive-app/canvas"></script>
+
+  <style>
+    /* Global & Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #111;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Header / Top Bar */
+    header {
+      width: 100%;
+      padding: 1rem;
+      background: #000;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* Hero Section */
+    .hero {
+  width: 100%;
+  min-height: 100vh;      /* full screen height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+}
+
+#riveCanvas {
+  width: 100%;      /* full width of screen */
+  height: auto;     /* maintain aspect ratio */
+  max-height: 85vh; /* allow animation to grow but not overflow */
+  display: block;
+  margin-bottom: 2rem; /* space between animation and text */
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  color: #ddd;
+  margin-bottom: 1rem;
+}
+
+.hero-content button {
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 12px;
+  background-color: #fff;
+  color: #111;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hero-content button:hover {
+  background-color: #eee;
+}
+
+@media(min-width: 768px) {
+  .hero-content h1 { font-size: 2.5rem; }
+  #riveCanvas { max-height: 90vh; }
+}
+
+
+    /* About Section */
+    .about {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: url('https://images.pexels.com/photos/12377480/pexels-photo-12377480.jpeg') center/cover no-repeat;
+      color: #fff;
+      text-align: left;
+      padding: 2rem;
+    }
+
+    .about .card {
+      background-color: rgba(0,0,0,0.7);
+      padding: 15PX;
+      border-radius: 16px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .about h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .about ul {
+      list-style: disc;
+      padding-left: 1.2rem;
+    }
+
+    .about li {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #555;
+      border-top: 1px solid #eee;
+    }
+
+    @media(min-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .about h2 { font-size: 2rem; }
+      .about li { font-size: 1.1rem; }
+      #riveCanvas { max-height: 70vh; }
+    }
+
+/* Videos & Resources Section */
+.resources {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #fff;
+  color: #111;
+  padding: 2rem 1rem; /* smaller padding for phones */
+}
+
+.resources .card {
+  background-color: #f9f9f9;
+  padding: 2rem; /* smaller padding for mobile */
+  border-radius: 16px;
+  width: 100%;
+  max-width: 95%; /* almost full width on phone */
+  line-height: 1.6;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  margin: 0 auto;
+}
+
+.resources h2 {
+  font-size: 1.8rem; /* smaller for mobile */
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+}
+
+.resources ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+}
+
+.resources li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+.resources a {
+  color: #111;
+  text-decoration: underline;
+}
+
+/* Adjust for larger screens */
+@media(min-width: 768px) {
+  .resources h2 { font-size: 2.5rem; }
+  .resources li { font-size: 1.2rem; }
+  .resources .card { padding: 3rem; max-width: 900px; }
+}
+
+
+
+  </style>
+</head>
+<body>
+
+  <header>E20 Fuel</header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <canvas id="riveCanvas"></canvas>
+    <div class="hero-content">
+      <h1>Clean & Efficient Energy</h1>
+      <p>Explore how E20 fuel combines 20% ethanol with petrol for a sustainable future.</p>
+      <button>Scroll to know more!</button>
+    </div>
+  </section>
+  
+  
+  
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="card">
+      <h2>A Brief on E20</h2>
+      <ul>
+        <li>E20 is a fuel blend of 20% ethanol and 80% petrol, launched nationwide in India by 2025 to promote cleaner energy and reduce oil imports.</li>
+        <li>The ethanol is produced locally from crops like sugarcane and corn, supporting farmers and boosting the rural economy.</li>
+        <li>E20 fuel reduces carbon emissions by about 30% compared to E10 and improves vehicle acceleration due to higher octane levels.</li>
+        <li>Older vehicles not designed for E20 may face engine issues and reduced fuel efficiency, while newer models post-2023 are generally compatible.</li>
+        <li>India aims to fully adopt E20 fuel by 2025 as a step toward energy security, environmental goals, and rural development.</li>
+      </ul>
+      
+      
+    </div>
+  </section>
+    <!-- Videos & Resources Section -->
+    <section class="resources">
+        <div class="card">
+        <h2>Videos & Resources</h2>
+        <ul>
+            <li><a href="https://www.bbc.com/news/articles/cvgv873y02eo" target="_blank">India's biofuel drive is saving billions but... - BBC article</a></li>
+            <li><a href="https://www.reuters.com/sustainability/climate-energy/why-e20-fuel-is-causing-angst-indias-auto-market-2025-09-07/" target="_blank">Why E20 fuel is causing angst in India's auto market - Reuters article</a></li>
+            <li><a href="https://youtu.be/GGWCm6NmUnc?si=z2s_GZGiNFtA2ELk" target="_blank">This Petrol is Silently DESTROYING Your Vehicle - Chitti</a></li>
+            <li><a href="https://youtu.be/-EHJ6aeITl0?si=zTiNCkt8DbqxozgA" target="_blank">Reality of E20 Petrol! | Is Ethanol Good or Bad? | Dhruv Rathee            </a></li>
+            <li><a href="https://youtu.be/lHQIUCUc56A?si=6j62Ov0posMFCEMB" target="_blank">இனி பெட்ரோல் போடும் போது இத கவனிங்க... Does E20 fuel damage your Engine? | Engineering Facts</a></li>
+            
+        </ul>
+        </div>
+    </section>
+  
+    
+
+  <footer>Developed by Sanjiith, Subash, Nithin, Nisvanth, Harsha</footer>
+
+  <!-- Rive Animation -->
+  <script>
+window.onload = () => {
+  new rive.Rive({
+    src: "kumar.riv",
+    canvas: document.getElementById("riveCanvas"),
+    autoplay: true,
+    stateMachines: "Drive machine",
+    fit: rive.Fit.contain,       // maintains aspect ratio
+    alignment: rive.Alignment.center
+  });
+};
+
+
+
+
+
+  </script>
+
+</body>
+</html>

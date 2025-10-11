@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>E20 Fuels</title>
 
   <!-- Rive CDN -->
-  <script src="https://unpkg.com/@rive-app/canvas"></script>
+  <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
 
   <style>
-    /* Global & Reset */
+    /* GLOBAL RESET */
     * {
       margin: 0;
       padding: 0;
@@ -23,9 +23,6 @@
       overflow-x: hidden;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* Header / Top Bar */
     header {
       width: 100%;
       padding: 1rem;
@@ -39,63 +36,70 @@
       z-index: 1000;
     }
 
-    /* Hero Section */
+    /* HERO SECTION — PHONE FIRST */
     .hero {
-  width: 100%;
-  min-height: 100vh;      /* full screen height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: #111;
-  color: #fff;
-  text-align: center;
-  padding: 1rem;
-}
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding: 1rem;
+    }
 
-#riveCanvas {
-  width: 100%;      /* full width of screen */
-  height: auto;     /* maintain aspect ratio */
-  max-height: 85vh; /* allow animation to grow but not overflow */
-  display: block;
-  margin-bottom: 2rem; /* space between animation and text */
-}
+    /* 👇 The important part — canvas setup */
+    #riveCanvas {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;  /* Ensures perfect fit */
+      display: block;
+      margin-bottom: 1.5rem;
+    }
 
-.hero-content h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
+    .hero-content h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
 
-.hero-content p {
-  font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 1rem;
-}
+    .hero-content p {
+      font-size: 1rem;
+      color: #ddd;
+      margin-bottom: 1rem;
+      max-width: 90%;
+    }
 
-.hero-content button {
-  padding: 0.8rem 2rem;
-  border: none;
-  border-radius: 12px;
-  background-color: #fff;
-  color: #111;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
+    .hero-content button {
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #fff;
+      color: #111;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-.hero-content button:hover {
-  background-color: #eee;
-}
+    .hero-content button:hover {
+      background-color: #eee;
+    }
 
-@media(min-width: 768px) {
-  .hero-content h1 { font-size: 2.5rem; }
-  #riveCanvas { max-height: 90vh; }
-}
+    @media (min-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.8rem;
+      }
+      .hero-content p {
+        font-size: 1.2rem;
+        max-width: 600px;
+      }
+    }
 
-
-    /* About Section */
+    /* ABOUT SECTION */
     .about {
       width: 100%;
       min-height: 100vh;
@@ -106,12 +110,12 @@
       background: url('https://images.pexels.com/photos/12377480/pexels-photo-12377480.jpeg') center/cover no-repeat;
       color: #fff;
       text-align: left;
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
 
     .about .card {
-      background-color: rgba(0,0,0,0.7);
-      padding: 15PX;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1.5rem;
       border-radius: 16px;
       max-width: 600px;
       line-height: 1.6;
@@ -123,17 +127,48 @@
       margin-bottom: 1rem;
     }
 
-    .about ul {
-      list-style: disc;
-      padding-left: 1.2rem;
-    }
-
     .about li {
       margin-bottom: 0.8rem;
       font-size: 1rem;
     }
 
-    /* Footer */
+    /* RESOURCES SECTION */
+    .resources {
+      width: 100%;
+      min-height: 100vh;
+      background-color: #fff;
+      color: #111;
+      padding: 2rem 1rem;
+    }
+
+    .resources .card {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 95%;
+      line-height: 1.6;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      margin: 0 auto;
+    }
+
+    .resources h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .resources li {
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+    }
+
+    .resources a {
+      color: #111;
+      text-decoration: underline;
+    }
+
+    /* FOOTER */
     footer {
       padding: 1.5rem;
       text-align: center;
@@ -142,70 +177,19 @@
       border-top: 1px solid #eee;
     }
 
-    @media(min-width: 768px) {
-      .hero h1 { font-size: 2.5rem; }
+    @media (min-width: 768px) {
       .about h2 { font-size: 2rem; }
       .about li { font-size: 1.1rem; }
-      #riveCanvas { max-height: 70vh; }
+      .resources h2 { font-size: 2.5rem; }
+      .resources li { font-size: 1.2rem; }
+      .resources .card { padding: 3rem; max-width: 900px; }
     }
-
-/* Videos & Resources Section */
-.resources {
-  width: 100%;
-  min-height: 100vh;
-  background-color: #fff;
-  color: #111;
-  padding: 2rem 1rem; /* smaller padding for phones */
-}
-
-.resources .card {
-  background-color: #f9f9f9;
-  padding: 2rem; /* smaller padding for mobile */
-  border-radius: 16px;
-  width: 100%;
-  max-width: 95%; /* almost full width on phone */
-  line-height: 1.6;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  margin: 0 auto;
-}
-
-.resources h2 {
-  font-size: 1.8rem; /* smaller for mobile */
-  font-weight: 700;
-  margin-bottom: 1.2rem;
-}
-
-.resources ul {
-  list-style: disc;
-  padding-left: 1.2rem;
-}
-
-.resources li {
-  margin-bottom: 0.8rem;
-  font-size: 1rem;
-}
-
-.resources a {
-  color: #111;
-  text-decoration: underline;
-}
-
-/* Adjust for larger screens */
-@media(min-width: 768px) {
-  .resources h2 { font-size: 2.5rem; }
-  .resources li { font-size: 1.2rem; }
-  .resources .card { padding: 3rem; max-width: 900px; }
-}
-
-
-
   </style>
 </head>
 <body>
-
   <header>E20 Fuel</header>
 
-  <!-- Hero Section -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <canvas id="riveCanvas"></canvas>
     <div class="hero-content">
@@ -214,62 +198,61 @@
       <button>Scroll to know more!</button>
     </div>
   </section>
-  
-  
-  
 
-  <!-- About Section -->
+  <!-- ABOUT -->
   <section class="about">
     <div class="card">
       <h2>A Brief on E20</h2>
       <ul>
-        <li>E20 is a fuel blend of 20% ethanol and 80% petrol, launched nationwide in India by 2025 to promote cleaner energy and reduce oil imports.</li>
-        <li>The ethanol is produced locally from crops like sugarcane and corn, supporting farmers and boosting the rural economy.</li>
-        <li>E20 fuel reduces carbon emissions by about 30% compared to E10 and improves vehicle acceleration due to higher octane levels.</li>
-        <li>Older vehicles not designed for E20 may face engine issues and reduced fuel efficiency, while newer models post-2023 are generally compatible.</li>
-        <li>India aims to fully adopt E20 fuel by 2025 as a step toward energy security, environmental goals, and rural development.</li>
+        <li>E20 is a blend of 20% ethanol and 80% petrol — India’s step towards cleaner energy.</li>
+        <li>Made locally from sugarcane & corn, supporting rural economies.</li>
+        <li>Reduces CO₂ emissions by ~30% and boosts octane for smoother rides.</li>
+        <li>Post-2023 vehicles are E20-ready, older ones may need checks.</li>
       </ul>
-      
-      
     </div>
   </section>
-    <!-- Videos & Resources Section -->
-    <section class="resources">
-        <div class="card">
-        <h2>Videos & Resources</h2>
-        <ul>
-            <li><a href="https://www.bbc.com/news/articles/cvgv873y02eo" target="_blank">India's biofuel drive is saving billions but... - BBC article</a></li>
-            <li><a href="https://www.reuters.com/sustainability/climate-energy/why-e20-fuel-is-causing-angst-indias-auto-market-2025-09-07/" target="_blank">Why E20 fuel is causing angst in India's auto market - Reuters article</a></li>
-            <li><a href="https://youtu.be/GGWCm6NmUnc?si=z2s_GZGiNFtA2ELk" target="_blank">This Petrol is Silently DESTROYING Your Vehicle - Chitti</a></li>
-            <li><a href="https://youtu.be/-EHJ6aeITl0?si=zTiNCkt8DbqxozgA" target="_blank">Reality of E20 Petrol! | Is Ethanol Good or Bad? | Dhruv Rathee            </a></li>
-            <li><a href="https://youtu.be/lHQIUCUc56A?si=6j62Ov0posMFCEMB" target="_blank">இனி பெட்ரோல் போடும் போது இத கவனிங்க... Does E20 fuel damage your Engine? | Engineering Facts</a></li>
-            
-        </ul>
-        </div>
-    </section>
-  
-    
+
+  <!-- RESOURCES -->
+  <section class="resources">
+    <div class="card">
+      <h2>Videos & Resources</h2>
+      <ul>
+        <li><a href="https://www.bbc.com/news/articles/cvgv873y02eo" target="_blank">India's biofuel drive — BBC</a></li>
+        <li><a href="https://www.reuters.com/sustainability/climate-energy/why-e20-fuel-is-causing-angst-indias-auto-market-2025-09-07/" target="_blank">Why E20 fuel is causing angst — Reuters</a></li>
+        <li><a href="https://youtu.be/GGWCm6NmUnc" target="_blank">This Petrol is Silently DESTROYING Your Vehicle — Chitti</a></li>
+        <li><a href="https://youtu.be/-EHJ6aeITl0" target="_blank">Reality of E20 Petrol | Dhruv Rathee</a></li>
+      </ul>
+    </div>
+  </section>
 
   <footer>Developed by Sanjiith, Subash, Nithin, Nisvanth, Harsha</footer>
 
-  <!-- Rive Animation -->
+  <!-- RIVE SCRIPT -->
   <script>
-window.onload = () => {
-  new rive.Rive({
-    src: "kumar.riv",
-    canvas: document.getElementById("riveCanvas"),
-    autoplay: true,
-    stateMachines: "Drive machine",
-    fit: rive.Fit.contain,       // maintains aspect ratio
-    alignment: rive.Alignment.center
-  });
-};
+    window.onload = () => {
+      const canvas = document.getElementById('riveCanvas');
+      const dpr = window.devicePixelRatio || 1;
 
+      function resizeCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * dpr;
+        canvas.height = rect.height * dpr;
+      }
 
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
 
-
-
+      new rive.Rive({
+        src: "jebakumar.riv",        // put the .riv file in the same folder as this HTML
+        canvas: canvas,
+        autoplay: true,
+        stateMachines: "Drive machine",
+        fit: rive.Fit.contain,
+        alignment: rive.Alignment.center,
+        renderer: "webgl",
+        pixelRatio: dpr
+      });
+    };
   </script>
-
 </body>
 </html>

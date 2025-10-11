@@ -1,282 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E20 Fuels</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E20 Fuel Simulator - Clean Energy for India</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
 
-  <!-- Rive CDN -->
-  <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
-
-  <style>
-    /* GLOBAL RESET */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', Arial, sans-serif;
-    }
-
-    body {
-      background-color: #fff;
-      color: #111;
-      overflow-x: hidden;
-    }
-
-    header {
-      width: 100%;
-      padding: 1rem;
-      background: #000;
-      color: #fff;
-      font-weight: 700;
-      font-size: 1.5rem;
-      text-align: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    /* HERO SECTION — PHONE FIRST */
-    .hero {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-    }
-
-    /* 👇 The important part — canvas setup */
-    #riveCanvas {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;  /* Ensures perfect fit */
-      display: block;
-      margin-bottom: 1.5rem;
-    }
-
-    .hero-content h1 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-content p {
-      font-size: 1rem;
-      color: #ddd;
-      margin-bottom: 1rem;
-      max-width: 90%;
-    }
-
-    .hero-content button {
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 12px;
-      background-color: #fff;
-      color: #111;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .hero-content button:hover {
-      background-color: #eee;
-    }
-
-    @media (min-width: 768px) {
-      .hero-content h1 {
-        font-size: 2.8rem;
-      }
-      .hero-content p {
-        font-size: 1.2rem;
-        max-width: 600px;
-      }
-    }
-
-    /* ABOUT SECTION */
-    .about {
-      width: 100%;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: url('https://images.pexels.com/photos/12377480/pexels-photo-12377480.jpeg') center/cover no-repeat;
-      color: #fff;
-      text-align: left;
-      padding: 2rem 1rem;
-    }
-
-    .about .card {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 1.5rem;
-      border-radius: 16px;
-      max-width: 600px;
-      line-height: 1.6;
-    }
-
-    .about h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-
-    .about li {
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-    }
-
-    /* RESOURCES SECTION */
-    .resources {
-      width: 100%;
-      min-height: 100vh;
-      background-color: #fff;
-      color: #111;
-      padding: 2rem 1rem;
-    }
-
-    .resources .card {
-      background-color: #f9f9f9;
-      padding: 2rem;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 95%;
-      line-height: 1.6;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      margin: 0 auto;
-    }
-
-    .resources h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-    }
-
-    .resources li {
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-    }
-
-    .resources a {
-      color: #111;
-      text-decoration: underline;
-    }
-
-    /* FOOTER */
-    footer {
-      padding: 1.5rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: #555;
-      border-top: 1px solid #eee;
-    }
-
-    @media (min-width: 768px) {
-      .about h2 { font-size: 2rem; }
-      .about li { font-size: 1.1rem; }
-      .resources h2 { font-size: 2.5rem; }
-      .resources li { font-size: 1.2rem; }
-      .resources .card { padding: 3rem; max-width: 900px; }
-    }
-    /* CUSTOM SCROLLBAR STYLE */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #111; /* Dark track behind the bar */
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #00ff88, #00c8ff);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #00ffa2, #00d4ff);
-}
-
-/* Firefox support */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: #00c8ff #111;
-}
-
-  </style>
 </head>
 <body>
-  <header>E20 Fuel</header>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>🌱 E20 Fuel Simulator</h1>
+            <p>Discover the environmental benefits of ethanol-blended fuel in India</p>
+        </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <canvas id="riveCanvas"></canvas>
-    <div class="hero-content">
-      <h1>Clean & Efficient Energy</h1>
-      <p>Explore how E20 fuel combines 20% ethanol with petrol for a sustainable future.</p>
-      <button>Scroll to know more!</button>
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Emissions Dashboard -->
+            <aside class="emissions-panel">
+                <h3>🌍 Emissions Monitor</h3>
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">CO₂ Emissions</span>
+                        <span class="emission-value" id="co2-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill co2-fill" id="co2-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="co2-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">CO Emissions</span>
+                        <span class="emission-value" id="co-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill co-fill" id="co-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="co-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">HC Emissions</span>
+                        <span class="emission-value" id="hc-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill hc-fill" id="hc-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="hc-reduction">-0% vs Pure Petrol</span>
+                </div>
+
+                <div class="emission-card">
+                    <div class="emission-header">
+                        <span class="emission-label">Particulate Matter</span>
+                        <span class="emission-value" id="pm-value">100%</span>
+                    </div>
+                    <div class="emission-bar">
+                        <div class="emission-fill pm-fill" id="pm-bar"></div>
+                    </div>
+                    <span class="emission-reduction" id="pm-reduction">-0% vs Pure Petrol</span>
+                </div>
+            </aside>
+
+            <!-- Central Engine Area -->
+            <main class="engine-area">
+                <div class="engine-container">
+                    <div class="engine-glow" id="engine-glow"></div>
+                    
+                    <!-- Engine SVG -->
+                    <div class="engine-svg">
+                        <img src="engimg.png" alt="" srcset="">                    
+                    </div>
+
+                    <!-- Smoke Particles -->
+                    <div class="smoke-container" id="smoke-container">
+                        <!-- Smoke particles will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Ethanol Control -->
+                <div class="ethanol-control">
+                    <div class="slider-container">
+                        <label for="ethanol-slider">Ethanol Percentage</label>
+                        <div class="slider-wrapper">
+                            <input type="range" id="ethanol-slider" min="0" max="20" value="0" step="1">
+                            <div class="slider-track">
+                                <div class="slider-fill" id="slider-fill"></div>
+                            </div>
+                        </div>
+                        <div class="ethanol-display">
+                            <span class="ethanol-value" id="ethanol-value">E0</span>
+                            <span class="ethanol-percentage">0% Ethanol</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Information Panel -->
+            <aside class="info-panel">
+                <div class="info-tabs">
+                    <button class="tab-btn active" data-tab="benefits">🌱 Benefits</button>
+                    <button class="tab-btn" data-tab="challenges">⚠️ Challenges</button>
+                    <button class="tab-btn" data-tab="india">🇮🇳 India Status</button>
+                </div>
+
+                <div class="tab-content active" id="benefits-tab">
+                    <div class="info-card">
+                        <div class="info-icon">🌱</div>
+                        <div class="info-text">
+                            <h4>Reduced Emissions</h4>
+                            <p>E20 reduces CO emissions by 30-50% and CO2 by 30% compared to pure petrol</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🛡️</div>
+                        <div class="info-text">
+                            <h4>Energy Security</h4>
+                            <p>Reduces India's crude oil imports by ₹43,000 crore annually</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🌾</div>
+                        <div class="info-text">
+                            <h4>Farmer Income</h4>
+                            <p>Provides ₹40,000 crore annually to farmers through ethanol production</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">♻️</div>
+                        <div class="info-text">
+                            <h4>Renewable Source</h4>
+                            <p>Ethanol is produced from sugarcane and other agricultural crops</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="challenges-tab">
+                    <div class="info-card">
+                        <div class="info-icon">⛽</div>
+                        <div class="info-text">
+                            <h4>Mileage Impact</h4>
+                            <p>Slight fuel efficiency drop of 1-6% in some vehicles</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🔧</div>
+                        <div class="info-text">
+                            <h4>Vehicle Compatibility</h4>
+                            <p>Older vehicles may need tuning for optimal E20 performance</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">🏗️</div>
+                        <div class="info-text">
+                            <h4>Infrastructure</h4>
+                            <p>Need for E20-compatible fuel stations and supply chains</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon">⚖️</div>
+                        <div class="info-text">
+                            <h4>Food vs Fuel</h4>
+                            <p>Balance needed between crop use for food and ethanol production</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="india-tab">
+                    <div class="india-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">2025</div>
+                            <div class="stat-label">20% ethanol blending achieved, 5 years ahead of schedule</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">₹1,44,087 Cr</div>
+                            <div class="stat-label">Foreign exchange saved since 2014-15</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">736 L MT</div>
+                            <div class="stat-label">CO2 reduction since 2014</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">Nationwide</div>
+                            <div class="stat-label">E20 availability by 2025</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Floating Background Particles -->
+        <div class="bg-particles" id="bg-particles"></div>
     </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section class="about">
-    <div class="card">
-      <h2>A Brief on E20</h2>
-      <ul>
-        <li>E20 is a blend of 20% ethanol and 80% petrol — India’s step towards cleaner energy.</li>
-        <li>Made locally from sugarcane & corn, supporting rural economies.</li>
-        <li>Reduces CO₂ emissions by ~30% and boosts octane for smoother rides.</li>
-        <li>Post-2023 vehicles are E20-ready, older ones may need checks.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- RESOURCES -->
-  <section class="resources">
-    <div class="card">
-      <h2>Videos & Resources</h2>
-      <ul>
-        <li><a href="https://www.bbc.com/news/articles/cvgv873y02eo" target="_blank">India's biofuel drive — BBC</a></li>
-        <li><a href="https://www.reuters.com/sustainability/climate-energy/why-e20-fuel-is-causing-angst-indias-auto-market-2025-09-07/" target="_blank">Why E20 fuel is causing angst — Reuters</a></li>
-        <li><a href="https://youtu.be/GGWCm6NmUnc" target="_blank">This Petrol is Silently DESTROYING Your Vehicle — Chitti</a></li>
-        <li><a href="https://youtu.be/-EHJ6aeITl0" target="_blank">Reality of E20 Petrol | Dhruv Rathee</a></li>
-      </ul>
-    </div>
-  </section>
-
-  <footer>Developed by Sanjiith, Subash, Nithin, Nisvanth, Harsha</footer>
-
-  <!-- RIVE SCRIPT -->
-  <script>
-    window.onload = () => {
-      const canvas = document.getElementById('riveCanvas');
-      const dpr = window.devicePixelRatio || 1;
-
-      function resizeCanvas() {
-        const rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width * dpr;
-        canvas.height = rect.height * dpr;
-      }
-
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      new rive.Rive({
-        src: "jebakumar.riv",        // put the .riv file in the same folder as this HTML
-        canvas: canvas,
-        autoplay: true,
-        stateMachines: "Drive machine",
-        fit: rive.Fit.contain,
-        alignment: rive.Alignment.center,
-        renderer: "webgl",
-        pixelRatio: dpr
-      });
-    };
-  </script>
+    <script src="app.js"></script>
 </body>
 </html>

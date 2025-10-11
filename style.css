@@ -908,6 +908,11 @@ select.form-control {
   animation: engineVibrate 0.1s linear infinite;
 }
 
+img {
+  width: 100%;
+  height: 300PX;
+}
+
 @keyframes engineVibrate {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(1px); }

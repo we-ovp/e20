@@ -6,6 +6,8 @@
     <title>E20 Fuel Simulator - Clean Energy for India</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+
 </head>
 <body>
     <div class="app-container">
@@ -72,39 +74,7 @@
                     
                     <!-- Engine SVG -->
                     <div class="engine-svg">
-                        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Engine Block -->
-                            <rect x="100" y="100" width="200" height="120" rx="10" fill="#2a2a2a" stroke="#4a4a4a" stroke-width="2"/>
-                            
-                            <!-- Cylinders -->
-                            <circle cx="140" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
-                            <circle cx="180" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
-                            <circle cx="220" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
-                            <circle cx="260" cy="140" r="15" fill="#1a1a1a" stroke="#666"/>
-                            
-                            <!-- Pistons -->
-                            <rect x="135" y="125" width="10" height="30" fill="#333" class="piston piston-1"/>
-                            <rect x="175" y="125" width="10" height="30" fill="#333" class="piston piston-2"/>
-                            <rect x="215" y="125" width="10" height="30" fill="#333" class="piston piston-3"/>
-                            <rect x="255" y="125" width="10" height="30" fill="#333" class="piston piston-4"/>
-                            
-                            <!-- Exhaust Pipes -->
-                            <rect x="320" y="120" width="40" height="15" rx="7" fill="#444" stroke="#666"/>
-                            <rect x="320" y="145" width="40" height="15" rx="7" fill="#444" stroke="#666"/>
-                            
-                            <!-- Engine Belt -->
-                            <circle cx="350" cy="180" r="25" fill="none" stroke="#666" stroke-width="3" class="engine-belt"/>
-                            <circle cx="320" cy="200" r="15" fill="none" stroke="#666" stroke-width="2"/>
-                            
-                            <!-- Air Filter -->
-                            <rect x="80" y="120" width="15" height="40" rx="5" fill="#555" stroke="#777"/>
-                            
-                            <!-- Fuel Injectors -->
-                            <rect x="130" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
-                            <rect x="170" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
-                            <rect x="210" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
-                            <rect x="250" y="90" width="8" height="15" fill="#0a84ff" stroke="#4d9eff"/>
-                        </svg>
+                        <img src="engimg.png" alt="" srcset="">                    
                     </div>
 
                     <!-- Smoke Particles -->

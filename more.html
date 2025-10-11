@@ -184,6 +184,30 @@
       .resources li { font-size: 1.2rem; }
       .resources .card { padding: 3rem; max-width: 900px; }
     }
+    /* CUSTOM SCROLLBAR STYLE */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111; /* Dark track behind the bar */
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff88, #00c8ff);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ffa2, #00d4ff);
+}
+
+/* Firefox support */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #00c8ff #111;
+}
+
   </style>
 </head>
 <body>

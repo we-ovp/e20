@@ -10,6 +10,11 @@
 
 <style>
 /* GLOBAL RESET */
+html {
+  scroll-behavior: smooth;
+}
+
+  
 * {
   margin: 0;
   padding: 0;
@@ -320,10 +325,15 @@ Despite being bio-based, E20 fuel is not cheaper than regular petrol due to high
 <footer>Developed by Sanjiith, Subash, Nithin, Nisvanth, Harsha</footer>
 
 <!-- SCROLL INDICATOR -->
-<div id="scroll-indicator"></div>
+
 
 <!-- RIVE SCRIPT -->
 <script>
+document.getElementById('scrollBtn').addEventListener('click', function() {
+  document.getElementById('resources').scrollIntoView({ behavior: 'smooth' });
+});
+
+  
 window.onload = () => {
   const canvas = document.getElementById('riveCanvas');
   const dpr = window.devicePixelRatio || 1;
